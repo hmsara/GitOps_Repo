@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring
+  template:
+    metadata:
+      labels:
+        app: spring
+    spec:
+      containers:
+      - name: spring
+        image: hmsara/back:1.4
+        ports:
+        - containerPort: 8089
+        env:
+        - name: MYSQL_HOST
+          value: mysqldb
+        - name: BD_NAME
+          value: achatdb
+        - name: MYSQL_USER
+          value: root
+        - name: MYSQL_PASSWORD
+          value: root
